@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller {
@@ -17,7 +18,11 @@ class TaskController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
+
+        $tasks = Task::where(['user_id' => Auth::user()->id])->get();
+        return response()->json([
+                    'tasks' => $tasks,
+                        ], 200);
     }
 
     /**
@@ -26,7 +31,7 @@ class TaskController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+//
     }
 
     /**
@@ -36,7 +41,21 @@ class TaskController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'description' => 'required',
+        ]);
+
+        $task = Task::create([
+                    'name' => request('name'),
+                    'description' => request('description'),
+                    'user_id' => Auth::user()->id
+        ]);
+
+        return response()->json([
+                    'task' => $task,
+                    'message' => 'Success'
+                        ], 200);
     }
 
     /**
@@ -46,7 +65,7 @@ class TaskController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Task $task) {
-        //
+//
     }
 
     /**
@@ -56,7 +75,7 @@ class TaskController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Task $task) {
-        //
+//
     }
 
     /**
@@ -67,7 +86,7 @@ class TaskController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Task $task) {
-        //
+//
     }
 
     /**
@@ -77,7 +96,7 @@ class TaskController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task) {
-        //
+//
     }
 
 }
