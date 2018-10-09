@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        My Profile
+                        My Profile Testing
                     </div>
 
                     <div class="panel-body">
