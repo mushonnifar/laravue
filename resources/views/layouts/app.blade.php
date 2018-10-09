@@ -49,6 +49,8 @@
                                 @endif
                             </li>
                         @else
+                            <router-link tag="li" to="/"><a>Tasks</a></router-link>
+                            <router-link tag="li" to="/profile"><a>Profile</a></router-link>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
